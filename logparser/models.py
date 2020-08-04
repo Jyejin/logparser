@@ -19,7 +19,7 @@ class HttpRequest:
 @dataclass(frozen=True, unsafe_hash=True)
 class ElbLogEntity():
     type: str
-    time: str
+    time: datetime.datetime
     elb: str
     client: Host
     target: Host

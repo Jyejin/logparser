@@ -1,7 +1,7 @@
 import gzip
 import os
 import csv
-from models import (
+from .models import (
     Host,
     ElbLogEntity,
     HttpRequest
@@ -24,6 +24,7 @@ def log_parser(logs=[]):
             [to_python(value, field) for value, field in zip(row, fields)])
 
 def to_python(value, field):
+    #todo: fromisoformat python3.7만 지원함...!
     value = value.rstrip('"').lstrip('"')
     if field.type is datetime.datetime:
         return value
@@ -63,15 +64,12 @@ def count(data):
     return sum(1 for x in data)
 
 def find(data, field, value):
-    result = []
+    #todo:대소문자 무시하고 찾을 수 있도록!
     for d in data:
-        #todo: user_agent, client_ip등은 equal말고 regex로 찾아야 함
-        if(d[field] == value):
-            result.append(d)
-    return result
+        if(d[field].find(value) > -1):
+            yield d
 
 def period(data, startdate, enddate):
-    result = {}
     for d in data:
         if startdate:
             if d.time < startdate:
@@ -79,5 +77,4 @@ def period(data, startdate, enddate):
         if enddate:
             if d.time > enddate:
                 continue
-        result.append(d)
-    return result
+        yield d
