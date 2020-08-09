@@ -4,6 +4,6 @@ logs/
 *.log
 .idea
 .vscode
-logparser/__pycahche__
-test/__pycahche__
+__pycahche__
+*.pyc
 .ipynb_checkpoints/
