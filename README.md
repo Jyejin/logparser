@@ -1,16 +1,7 @@
 # logparser
 AWS ELB 로그를 읽어와 분석합니다.
 
-
-## Installation
-***
-
-```bash
-pip install logparser
-```
-
 ## Usage
-***
 
 ### get_log
 
@@ -36,7 +27,6 @@ logs = logparse(log_files)
 ```
 
 ## Options
-***
 
 아래와 같은 기능을 사용할 수 있습니다.
 
@@ -52,9 +42,7 @@ logs = logparse(log_files)
 
 ---
 
-field 종류는 다음 링크를 확인하세요.
-
-https://docs.aws.amazon.com/athena/latest/ug/application-load-balancer-logs.html
+field 종류는 [다음 링크](https://docs.aws.amazon.com/athena/latest/ug/application-load-balancer-logs.html) 를 확인하세요.
 
 ### Example
 
@@ -73,7 +61,6 @@ for r in result:
 ```
 
 ## To Do
-***
 
 - `as_data(logs)` : change data type from generate type to list type
 - `to_csv(result)` : save the analyze result to csv file
@@ -81,8 +68,8 @@ for r in result:
 - ...
 
 ## Blog
-***
 
 프로젝트 제작 과정을 살펴 볼 수 있습니다.
 
-- pytest 만들기 :
+- [pytest 사용기](https://jyejin.github.io/2020/08/09/project-3/
+)
