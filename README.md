@@ -1,20 +1,16 @@
 # logparser
-
----
-
 AWS ELB 로그를 읽어와 분석합니다.
 
-# Installation
 
----
+## Installation
+***
 
 ```bash
 pip install logparser
 ```
 
-# Usage
-
----
+## Usage
+***
 
 ### get_log
 
@@ -39,9 +35,8 @@ import os
 logs = logparse(log_files)
 ```
 
-# Options
-
----
+## Options
+***
 
 아래와 같은 기능을 사용할 수 있습니다.
 
@@ -78,8 +73,7 @@ for r in result:
 ```
 
 ## To Do
-
----
+***
 
 - `as_data(logs)` : change data type from generate type to list type
 - `to_csv(result)` : save the analyze result to csv file
@@ -87,8 +81,7 @@ for r in result:
 - ...
 
 ## Blog
-
----
+***
 
 프로젝트 제작 과정을 살펴 볼 수 있습니다.
 
