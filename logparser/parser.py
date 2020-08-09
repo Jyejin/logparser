@@ -66,10 +66,13 @@ def count(data):
 
 def find(data, field, value):
     for d in data:
-        if(d[field].lower().find(value.lower()) > -1):
-            yield d
+        try:
+            if(d[field].lower().find(value.lower()) > -1):
+                yield d
+        except:
+            continue
 
-def period(data, startdate, enddate):
+def period(data, startdate=None, enddate=None):
     for d in data:
         if startdate:
             if d.time < pytz.UTC.localize(startdate):
