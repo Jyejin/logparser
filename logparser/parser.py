@@ -15,15 +15,21 @@ import pytz
 def get_log(path=os.getcwd()):
     for file in os.listdir(path):
         if file.find('.gz') != -1:
-            f = gzip.open(path+file, 'rt')
+            file_path = os.path.join(path, file)
+            f = gzip.open(file_path, 'rt')
             yield f.readlines()
 
 def log_parser(logs=[]):
     fields = dataclasses.fields(ElbLogEntity)
+    
+    parsed_logs = []
     for log in logs:
         for row in csv.reader(log, delimiter=' '):
-            yield ElbLogEntity(*
-            [to_python(value, field) for value, field in zip(row, fields)])
+            parsed_logs.append(ElbLogEntity(*
+                [to_python(value, field) for value, field in zip(row, fields)]
+            ))
+            
+    return parsed_logs
 
 def to_python(value, field):
     value = value.rstrip('"').lstrip('"')
