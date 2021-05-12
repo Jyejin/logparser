@@ -1,29 +1,48 @@
-import gzip
 import os
-import csv
+import gzip, csv
+import datetime
+import dataclasses
+import multiprocessing
+
+import urllib.parse, typing
+import dateutil.parser
+import pytz
+
 from .models import (
     Host,
     ElbLogEntity,
     HttpRequest
 )
-import dataclasses
-import urllib.parse, typing
-import datetime
-import dateutil.parser
-import pytz
 
 def get_log(path=os.getcwd()):
     for file in os.listdir(path):
         if file.find('.gz') != -1:
-            f = gzip.open(path+file, 'rt')
+            file_path = os.path.join(path, file)
+            f = gzip.open(file_path, 'rt')
             yield f.readlines()
 
-def log_parser(logs=[]):
+def log_parser(logs, **kwargs):
+    processes = kwargs['processes'] if kwargs.get('processes') else 2
+    
+    p = multiprocessing.Pool(processes=processes)
+    parsed_log = p.map(_log_parser, logs)
+    
+    result = []
+    for log in parsed_log:
+        result += log
+
+    return result
+
+def _log_parser(log):
     fields = dataclasses.fields(ElbLogEntity)
-    for log in logs:
-        for row in csv.reader(log, delimiter=' '):
-            yield ElbLogEntity(*
-            [to_python(value, field) for value, field in zip(row, fields)])
+    
+    parsed_log = []
+    for row in csv.reader(log, delimiter=' '):
+        parsed_log.append(ElbLogEntity(*
+            [to_python(value, field) for value, field in zip(row, fields)]
+        ))
+            
+    return parsed_log
 
 def to_python(value, field):
     value = value.rstrip('"').lstrip('"')
