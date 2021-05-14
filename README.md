@@ -42,7 +42,7 @@ logs = logparse(log_files)
 
 ---
 
-field 종류는 [다음 링크](https://docs.aws.amazon.com/athena/latest/ug/application-load-balancer-logs.html) 를 확인하세요.
+field 종류는 [다음 링크](https://docs.aws.amazon.com/elasticloadbalancing/latest/application/load-balancer-access-logs.html#access-log-entry-format) 를 확인하세요.
 
 ### Example
 
