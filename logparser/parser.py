@@ -50,6 +50,8 @@ def to_python(value, field):
         return dateutil.parser.parse(value)
     if field.type == datetime.date:
         return dateutil.parser.parse(value)
+    if field.type == datetime.time:
+        return dateutil.parser.parse(value)
     if field.type == typing.List[str]:
         return value.split(',')
     if value == '-':
@@ -58,8 +60,7 @@ def to_python(value, field):
         ip, port = value.split(':')
         return Host(ip, int(port))
     if field.type == HttpRequest:
-        method, url, protocol = value.split(' ')
-        return HttpRequest(method, url, protocol)
+        return value
     if field.name == 'user_agent':
         return urllib.parse.unquote(value)
     if field.name == 'uri_query':
