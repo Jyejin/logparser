@@ -8,12 +8,10 @@ class Host():
     ip: str
     port: int
 
-
 @dataclass(frozen=True)
 class HttpRequest:
     method: str
     url: str
-    query: dict
     protocol: str
 
 @dataclass(frozen=True, unsafe_hash=True)
@@ -43,6 +41,10 @@ class ElbLogEntity():
     actions_executed: typing.List[str]
     redirect_url: str
     error_reason: str
+    target_port_list: Host
+    target_status_code_list: str
+    classification: str
+    classification_reason: str
 
     def __getitem__(self, item):
         return getattr(self, item)
