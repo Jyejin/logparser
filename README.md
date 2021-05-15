@@ -1,6 +1,11 @@
 # logparser
 AWS ELB 로그를 읽어와 분석합니다.
 
+## Install
+```shell
+pip install -e .
+```
+
 ## Usage
 
 ### get_log
@@ -8,7 +13,7 @@ AWS ELB 로그를 읽어와 분석합니다.
 ELB 로그 파일이 있는 곳을 `log_dir` 로 지정하여 로그 파일을 읽습니다. 로그 파일의 확장자는 `.gz`입니다.
 
 ```python
-from logparser import get_log    
+from logparser import get_log
 import os    
 
 log_dir = os.getcwd()
