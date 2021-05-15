@@ -2,11 +2,12 @@ from setuptools import setup, find_packages
 
 install_requires = [
     'python-dateutil',
-    'pytz'
+    'pytz',
+    'urllib3'
 ]
 
 setup(
-    name='aws-parser-util',
+    name='logparser',
     version='1.0',
     description='AWS ELB log parser',
     auther='Jyejin',
