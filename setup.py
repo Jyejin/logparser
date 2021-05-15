@@ -14,6 +14,6 @@ setup(
     url='https://github.com/Jyejin/logparser',
     install_requires=install_requires,
     python_requires='>=3.5',
-    packages=['aws-parser-util'],
+    packages=['logparser'],
     find_packages=find_packages(exclude=('test',)),
 )
